@@ -1,3 +1,5 @@
+package Main;
+
 import GameState.GameStateManager;
 
 import javax.swing.*;
@@ -12,7 +14,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	public static final int HEIGHT = 240;
 	public static final int SCALE = 2;
 
-	//Game thread
+	//Main.Game thread
 	private Thread thread;
 	private boolean running;
 	private int FPS = 60;
@@ -43,7 +45,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	private void init() {
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-		g = (Graphics2D)g;
+		g = (Graphics2D)image.getGraphics();
 		running = true;
 		gameStateManager = new GameStateManager();
 
@@ -56,13 +58,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		long wait;
 
 		while(running) {
+			start = System.nanoTime();
+
 			update();
 			draw();
 			drawToScreen();
 
 			elapsed = System.nanoTime() - start;
 			wait = targetTime - elapsed / 1000000;
-
+			if (wait < 0) {
+				wait = 5;
+			}
 			try {
 				Thread.sleep(wait);
 			} catch (Exception e) {
@@ -73,16 +79,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	private void drawToScreen() {
 		Graphics g2 = getGraphics();
-		g2.drawImage(image,0,0,null);
+		g2.drawImage(image,0,0,WIDTH * SCALE, HEIGHT * SCALE, null);
 		g2.dispose();
 	}
 
 	private void draw() {
-
+		gameStateManager.draw(g);
 	}
 
 	private void update() {
-		gameStateManager.draw(g);
+		gameStateManager.update();
 	}
 
 	@Override
@@ -92,11 +98,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent keyEvent) {
-		gameStateManager.keyPressed(keyEvent.getKeyCode());
+		gameStateManager.keyPressed(keyEvent);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent keyEvent) {
-		gameStateManager.keyReleased(keyEvent.getKeyCode());
+		gameStateManager.keyReleased(keyEvent);
 	}
 }

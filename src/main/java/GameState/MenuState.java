@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 public class MenuState extends GameState {
 
 	private Background bg;
-	private int currentChoice;
+	private int currentChoice = 0;
 
 	private Color titleColour;
 	private Font titleFont;
@@ -16,12 +16,11 @@ public class MenuState extends GameState {
 	private Font font;
 
 	private String[] options = {"Start", "Help", "Exit"};
-	}
 
 	public MenuState(GameStateManager gameStateManager) {
 		this.gameStateManager = gameStateManager;
 		try {
-			bg = new Background("/Backgrounds/menubg.gif",1);
+			bg = new Background("/Resources/Backgrounds/menubg.gif",1);
 			bg.setVector(-0.1, 0);
 
 			titleColour = new Color(128,0,0);
@@ -53,7 +52,7 @@ public class MenuState extends GameState {
 		g.drawString("Dragon Tale", 80,70);
 
 		g.setFont(font);
-		for (int i = 0; i < options.values().length; i++) {
+		for (int i = 0; i < options.length; i++) {
 			if(i == currentChoice) {
 				g.setColor(Color.BLACK);
 			} else {
@@ -64,6 +63,7 @@ public class MenuState extends GameState {
 		}
 
 	}
+
 	private void select() {
 		switch (currentChoice) {
 			case 0:break;
@@ -73,8 +73,8 @@ public class MenuState extends GameState {
 		}
 	}
 	@Override
-	public void keyPressed(int keyCode) {
-		switch(keyCode){
+	public void keyPressed(KeyEvent keyEvent) {
+		switch(keyEvent.getKeyCode()){
 			case KeyEvent.VK_ENTER:
 				select();
 				break;
@@ -86,10 +86,11 @@ public class MenuState extends GameState {
 			case KeyEvent.VK_DOWN:
 				if(++currentChoice == options.length) {
 					currentChoice = 0;
+				}
 		}
 	}
 
-	public void keyReleased(int k) {
+	public void keyReleased(KeyEvent keyEvent) {
 
 	}
 }

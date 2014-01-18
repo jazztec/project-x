@@ -1,5 +1,6 @@
 package GameState;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class GameStateManager {
@@ -26,12 +27,12 @@ public class GameStateManager {
 		gameStates.get(currentState).draw(g);
 
 	}
-	public void keyPressed(int k) {
-
+	public void keyPressed(KeyEvent keyEvent) {
+		gameStates.get(currentState).keyPressed(keyEvent);
 	}
 
-	public void keyReleased(int k) {
-
+	public void keyReleased(KeyEvent keyEvent) {
+		gameStates.get(currentState).keyReleased(keyEvent);
 	}
 
 }
