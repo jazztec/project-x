@@ -10,8 +10,8 @@ import java.awt.image.BufferedImage;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 	//dimensions
-	public static final int WIDTH = 320;
-	public static final int HEIGHT = 240;
+	public static int WIDTH = 320;
+	public static int HEIGHT = 240;
 	public static final int SCALE = 2;
 
 	//Main.Game thread
@@ -93,7 +93,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent keyEvent) {
-		//To change body of implemented methods use File | Settings | File Templates.
+
 	}
 
 	@Override

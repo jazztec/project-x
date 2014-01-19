@@ -66,9 +66,9 @@ public class MenuState extends GameState {
 
 	private void select() {
 		switch (currentChoice) {
-			case 0:break;
+			case 0: gameStateManager.setState(gameStateManager.LEVEL1STATE); break;
 			case 1:break;
-			case 2:System.exit(0);
+			case 2:System.exit(0); break;
 			default:break;
 		}
 	}
