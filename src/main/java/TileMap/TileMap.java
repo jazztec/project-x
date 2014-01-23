@@ -45,7 +45,7 @@ public class TileMap {
 		this.tileSize = tileSize;
 		numRowsToDraw = GamePanel.HEIGHT / tileSize +2;
 		numColsToDraw = GamePanel.WIDTH / tileSize +2;
-		tween = 0.07;
+		tween = 1;
 	}
 
 	public void loadTiles(String s) {
@@ -75,6 +75,11 @@ public class TileMap {
 			map = new int[numRows][numCols];
 			width = numCols * tileSize;
 			height = numRows * tileSize;
+
+			xmin = GamePanel.WIDTH - width;
+			xmax = 0;
+			ymin = GamePanel.HEIGHT - height;
+			ymax = 0;
 
 			String delims = "\\s+";
 			for (int row = 0; row < numRows; row++) {
