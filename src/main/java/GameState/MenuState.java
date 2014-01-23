@@ -6,91 +6,114 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class MenuState extends GameState {
-
+	
 	private Background bg;
+	
 	private int currentChoice = 0;
-
-	private Color titleColour;
+	private String[] options = {
+		"Start",
+		"Help",
+		"Quit"
+	};
+	
+	private Color titleColor;
 	private Font titleFont;
-
+	
 	private Font font;
-
-	private String[] options = {"Start", "Help", "Exit"};
-
-	public MenuState(GameStateManager gameStateManager) {
-		this.gameStateManager = gameStateManager;
+	
+	public MenuState(GameStateManager gsm) {
+		
+		this.gsm = gsm;
+		
 		try {
-			bg = new Background("/Resources/Backgrounds/menubg.gif",1);
+			
+			bg = new Background("/Backgrounds/menubg.gif", 1);
 			bg.setVector(-0.1, 0);
-
-			titleColour = new Color(128,0,0);
-			titleFont = new Font("Century Gothic", Font.PLAIN, 28);
+			
+			titleColor = new Color(128, 0, 0);
+			titleFont = new Font(
+					"Century Gothic",
+					Font.PLAIN,
+					28);
+			
 			font = new Font("Arial", Font.PLAIN, 12);
-		} catch (Exception e) {
+			
+		}
+		catch(Exception e) {
 			e.printStackTrace();
 		}
-
+		
 	}
-
-	@Override
-	public void init() {
-
-	}
-
-	@Override
+	
+	public void init() {}
+	
 	public void update() {
 		bg.update();
 	}
-
-	@Override
+	
 	public void draw(Graphics2D g) {
+		
+		// draw bg
 		bg.draw(g);
-
-		g.setColor(titleColour);
+		
+		// draw title
+		g.setColor(titleColor);
 		g.setFont(titleFont);
-		//need a function to centralise strings
-		g.drawString("Dragon Tale", 80,70);
-
+		g.drawString("Dragon Tale", 80, 70);
+		
+		// draw menu options
 		g.setFont(font);
-		for (int i = 0; i < options.length; i++) {
+		for(int i = 0; i < options.length; i++) {
 			if(i == currentChoice) {
 				g.setColor(Color.BLACK);
-			} else {
+			}
+			else {
 				g.setColor(Color.RED);
 			}
-			//draw options one after another
 			g.drawString(options[i], 145, 140 + i * 15);
 		}
-
+		
 	}
-
+	
 	private void select() {
-		switch (currentChoice) {
-			case 0: gameStateManager.setState(gameStateManager.LEVEL1STATE); break;
-			case 1:break;
-			case 2:System.exit(0); break;
-			default:break;
+		if(currentChoice == 0) {
+			gsm.setState(GameStateManager.LEVEL1STATE);
+		}
+		if(currentChoice == 1) {
+			// help
+		}
+		if(currentChoice == 2) {
+			System.exit(0);
 		}
 	}
-	@Override
-	public void keyPressed(KeyEvent keyEvent) {
-		switch(keyEvent.getKeyCode()){
-			case KeyEvent.VK_ENTER:
-				select();
-				break;
-			case KeyEvent.VK_UP:
-				if(--currentChoice == -1) {
-					currentChoice = options.length -1;
-				}
-				break;
-			case KeyEvent.VK_DOWN:
-				if(++currentChoice == options.length) {
-					currentChoice = 0;
-				}
+	
+	public void keyPressed(int k) {
+		if(k == KeyEvent.VK_ENTER){
+			select();
+		}
+		if(k == KeyEvent.VK_UP) {
+			currentChoice--;
+			if(currentChoice == -1) {
+				currentChoice = options.length - 1;
+			}
+		}
+		if(k == KeyEvent.VK_DOWN) {
+			currentChoice++;
+			if(currentChoice == options.length) {
+				currentChoice = 0;
+			}
 		}
 	}
-
-	public void keyReleased(KeyEvent keyEvent) {
-
-	}
+	public void keyReleased(int k) {}
+	
 }
+
+
+
+
+
+
+
+
+
+

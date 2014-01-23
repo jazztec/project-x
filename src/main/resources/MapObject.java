@@ -1,4 +1,4 @@
-package Resources;
+package resourcess;
 
 import Entity.Animation;
 import Main.GamePanel;
@@ -163,8 +163,8 @@ public abstract class MapObject {
 		this.dy = dy;
 	}
 	public void setMapPosition() {
-		xMap = tileMap.getX();
-		yMap = tileMap.getY();
+		xMap = tileMap.getx();
+		yMap = tileMap.gety();
 	}
 
 	public void setLeft(boolean b) { left = b; }

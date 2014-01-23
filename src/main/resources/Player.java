@@ -1,4 +1,4 @@
-package Resources;
+package resourcess;
 
 import Entity.Animation;
 import TileMap.TileMap;
@@ -80,7 +80,7 @@ public class Player extends MapObject {
 
 		//load sprites
 		try {
-			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Resources/Sprites/Player/playersprites.gif"));
+			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/resourcess/Sprites/Player/playersprites.gif"));
   // This will essentially pull out the sprites per row.  Bare in mind the if( i != 6) are delegated sprites that are 60*30 pixels
   // and not the native //30 * 30.  This will need to be corrected and have standards applied to each sprite sheet.
 			sprites = new ArrayList<BufferedImage[]>();

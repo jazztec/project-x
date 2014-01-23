@@ -1,10 +1,10 @@
 package Entity;
 
 import Main.GamePanel;
-import TileMap.TileMap;
 import TileMap.Tile;
+import TileMap.TileMap;
 
-import java.awt.Rectangle;
+import java.awt.*;
 
 public abstract class MapObject {
 	
@@ -181,8 +181,8 @@ public abstract class MapObject {
 	}
 	
 	public void setMapPosition() {
-		xmap = tileMap.getX();
-		ymap = tileMap.getY();
+		xmap = tileMap.getx();
+		ymap = tileMap.gety();
 	}
 	
 	public void setLeft(boolean b) { left = b; }
